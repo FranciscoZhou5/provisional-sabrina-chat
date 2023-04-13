@@ -18,7 +18,7 @@ function Message({ content, role }: IMessageProps) {
         <div className="h-full flex items-start">
           <div className="w-10 h-10 relative">
             <Image
-              src={role === "user" ? "/user.gif" : "/chisato.jpg"}
+              src={role === "user" ? "/user.png" : "/chisato.jpg"}
               sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
               alt="User avatar"
               fill

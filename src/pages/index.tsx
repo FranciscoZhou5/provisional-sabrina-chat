@@ -1,6 +1,6 @@
 import Header from "@/components/Header";
 import TextareaAutosize from "react-textarea-autosize";
-import { Lightning } from "@phosphor-icons/react";
+import { Divide, Lightning } from "@phosphor-icons/react";
 
 import Head from "next/head";
 import { useState } from "react";
@@ -10,7 +10,7 @@ import ChatMessages from "@/components/ChatMessages";
 export default function Home() {
   const [prompt, setPrompt] = useState("");
 
-  const { handleSendMessage } = useChatContext();
+  const { handleSendMessage, showHeroSection } = useChatContext();
 
   return (
     <>
@@ -24,11 +24,22 @@ export default function Home() {
       <Header />
 
       <main>
+        {/* {showHeroSection && <div> Hero </div>} */}
+
         <ChatMessages />
 
         <form className="max-w-[650px] z-20 px-4 fixed bottom-6 left-1/2 -translate-x-1/2 w-full">
           <div className="flex bg-gray-200 dark:bg-zinc-800 rounded-md items-center">
             <TextareaAutosize
+              onKeyDown={(e) => {
+                const isMobile = window.innerWidth < 1024;
+
+                if (e.key === "Enter" && !isMobile) {
+                  e.preventDefault();
+                  handleSendMessage(prompt);
+                  setPrompt("");
+                }
+              }}
               placeholder="Enviar uma mensagem..."
               className="outline-none bg-transparent rounded-md w-full pl-2 py-2 resize-none text-sm"
               onChange={(e) => setPrompt(e.target.value)}

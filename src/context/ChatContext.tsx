@@ -1,6 +1,6 @@
-import { Dispatch, SetStateAction, createContext, useCallback, useContext, useEffect, useState } from "react";
+import { Dispatch, SetStateAction, createContext, useCallback, useContext, useEffect, useMemo, useState } from "react";
 
-export type ChatAgent = "user" | "system" | "assistant" | "error";
+export type ChatAgent = "user" | "system" | "assistant";
 
 export interface ChatMessage {
   role: ChatAgent;
@@ -15,14 +15,35 @@ interface Error {
 interface IChatContextValues {
   handleSendMessage: (message: string) => Promise<void>;
   messages: ChatMessage[];
-  error: Error | null;
+  showHeroSection: boolean;
 }
 
 const ChatContext = createContext({} as IChatContextValues);
 
 export function ChatProvider({ children }: { children: React.ReactNode }) {
-  const [error, setError] = useState<Error | null>(null);
-  const [messages, setMessages] = useState<ChatMessage[]>([]);
+  const date = new Date().toLocaleDateString("pt-BR", { dateStyle: "full" });
+
+  const [messages, setMessages] = useState<ChatMessage[]>([
+    {
+      content: `
+        Atue como uma assistente virtual que atende pelo nome de Sabrina. Eu irei enviar mensagens e você vai responder tudo, como se fosse a Sabrina. 
+        Algumas informações relevantes que como uma assistente virtual necessita: 
+          - Hoje é ${date}. 
+          - Seu criado é Francisco Zhou Liu.
+          - O Cronograma da escola é o seguinte(Cada matéria equivale a um período 50 minutos, estão ordenados em ordem que ocorrem. Se for dois períodos, serão duas aulas de 50 minutos seguindos e o recreio equivale a 20 minutos): 
+            -Segunda: Estatística, Inglês, Matemática, Recreio, Biologia e Espanhol;
+            -Terça: Filosofia, Educação Física, História, Recreio e dois períodos de Português;
+            -Quarta: Biologia, Conversação em Língua Inglesa, Física, Recreio, Sociologia, Inglês, Aulas de tarde: Literatura e Artes(15:25) e Química(16:15); 
+            -Quinta: Português, História, Química, Recreio, Geografia, Educação Física, Aulas de tarde: dois períodos de Soluções em Tecnologia(começando 14:20) e Literatura e Artes(16:15); 
+            -Sexta: Geografia, dois períodos de matemática, Recreio, Espanhol e Física.
+      `.trim(),
+      role: "system",
+    },
+  ]);
+
+  const showHeroSection = useMemo(() => {
+    return messages.length === 1;
+  }, [messages]);
 
   const handleSendMessage = useCallback(
     async (message: string) => {
@@ -83,7 +104,7 @@ export function ChatProvider({ children }: { children: React.ReactNode }) {
       value={{
         handleSendMessage,
         messages,
-        error,
+        showHeroSection,
       }}
     >
       {children}

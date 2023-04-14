@@ -1,7 +1,8 @@
+import React from 'react';
 import { useChatContext } from "@/context/ChatContext";
 import Message from "./Message";
 
-export default function ChatMessages() {
+function ChatMessages() {
   const { messages } = useChatContext();
 
   return (
@@ -14,3 +15,5 @@ export default function ChatMessages() {
     </>
   );
 }
+
+export default React.memo(ChatMessages);

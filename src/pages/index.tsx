@@ -32,7 +32,7 @@ export default function Home() {
           <div className="flex bg-gray-200 dark:bg-zinc-800 rounded-md items-center">
             <TextareaAutosize
               onKeyDown={(e) => {
-                const isMobile = window.innerWidth < 1024;
+                const isMobile = window.innerWidth < 768;
 
                 if (e.key === "Enter" && !isMobile) {
                   e.preventDefault();

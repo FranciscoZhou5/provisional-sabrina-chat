@@ -39,6 +39,18 @@ export function ChatProvider({ children }: { children: React.ReactNode }) {
       `.trim(),
       role: "system",
     },
+    //     {
+    //       role: "assistant",
+    //       content: `
+    //         A propriedade \`classname\` é o class.
+
+    // \`\`\`py
+    //   function main() {
+    //     console.log('main')
+    //   }
+    // \`\`\`
+    //       `.trim(),
+    //     },
   ]);
 
   const showHeroSection = useMemo(() => {

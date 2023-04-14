@@ -1,8 +1,8 @@
 import Image from "next/image";
-import MarkdownRenderer from "./MarkdownRenderer";
 import { ChatAgent } from "@/context/ChatContext";
 import classNames from "classnames";
 import { memo } from "react";
+import MarkdownRenderer from "../MarkdownRenderer";
 
 interface IMessageProps {
   content: string;

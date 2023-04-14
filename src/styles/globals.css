@@ -6,3 +6,8 @@ body {
   @apply min-h-screen font-sans transition-colors duration-200 bg-slate-50 dark:bg-zinc-900 text-gray-900 dark:text-white;
   @apply scrollbar scrollbar-thumb-gray-300 scrollbar-track-slate-200 dark:scrollbar-thumb-[#1c1c1f] dark:scrollbar-track-[#09090b];
 }
+
+code,
+pre {
+  @apply font-monospace;
+}

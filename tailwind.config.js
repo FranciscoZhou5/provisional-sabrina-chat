@@ -13,6 +13,7 @@ module.exports = {
     extend: {
       fontFamily: {
         sans: ["var(--inter-font)"],
+        monospace: ["var(--jetbrains-mono-font)"],
       },
     },
   },

@@ -22,6 +22,9 @@ export default function MarkdownRenderer({ content }: IMarkdownRendererProps) {
           return <li className="pt-2 pb-1"> {children} </li>;
         },
         code: CodeBlock,
+        pre: ({ children }) => {
+          return <>{children}</>;
+        },
       }}
     >
       {content}

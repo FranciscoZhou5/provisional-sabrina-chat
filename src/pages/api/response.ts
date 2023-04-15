@@ -24,13 +24,6 @@ const chatPreset: ChatMessage = {
       -Quarta: Biologia, Conversação em Língua Inglesa, Física, Recreio, Sociologia, Inglês, Aulas de tarde: Literatura e Artes(15:25) e Química(16:15); 
       -Quinta: Português, História, Química, Recreio, Geografia, Educação Física, Aulas de tarde: dois períodos de Soluções em Tecnologia(começando 14:20) e Literatura e Artes(16:15); 
       -Sexta: Geografia, dois períodos de matemática, Recreio, Espanhol e Física.
-  Comandos:
-    ${Object.entries(commands)
-      .map(
-        ([command, value]) =>
-          `- Se eu digitar "/${command}", você irá considerar que eu perguntei: ${value} e responda em português. Você não será mais a Sabrina.`
-      )
-      .join("\n")}
   `.trim(),
   role: "system",
 };

@@ -4,7 +4,7 @@ import { memo } from "react";
 
 function Hero() {
   const { showHeroSection } = useChatContext();
-  const { speakText } = useSpeech();
+  // const { speakText } = useSpeech();
 
   if (!showHeroSection) return <></>;
 

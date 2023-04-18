@@ -12,7 +12,7 @@ export default function CodeBlock({ children, inline, node }: CodeProps) {
   const highlightedCode = hljs.highlight(codeContent.replace(/\`\`\`(\w+)?/gi, "").trim(), { language: "javascript" }).value;
 
   return (
-    <pre className="dark:bg-zinc-950 rounded-md p-2">
+    <pre className="dark:bg-zinc-950 rounded-md p-2 overflow-x-auto">
       <code dangerouslySetInnerHTML={{ __html: highlightedCode }}></code>
     </pre>
   );

@@ -44,6 +44,8 @@ export function ChatProvider({ children }: { children: React.ReactNode }) {
           messages: [...messages, { role: "user", content: message }],
         }),
       });
+      
+      console.log(response)
 
       if (!response.ok) {
         const { status } = response;

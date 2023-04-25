@@ -7,7 +7,11 @@ import Head from "next/head";
 import Image from "next/image";
 import Link from "next/link";
 
-export default function PromptsList({ prompts }: InferGetStaticPropsType<typeof getStaticProps>) {
+interface IProps {
+  prompts: { prompt: string; avatar: number }[];
+}
+
+function PromptsList({ prompts }: IProps) {
   return (
     <>
       <Head>
@@ -55,13 +59,23 @@ export default function PromptsList({ prompts }: InferGetStaticPropsType<typeof 
   );
 }
 
-export const getStaticProps = async () => {
+PromptsList.getInitialProps = async () => {
   const { data } = await supabase.from("prompts").select("*");
 
   return {
-    props: {
-      prompts: data?.reverse() as { prompt: string; avatar: number }[],
-      revalidate: 5,
-    },
+    prompts: data?.reverse() as { prompt: string; avatar: number }[],
   };
 };
+
+export default PromptsList;
+
+// export const getStaticProps = async () => {
+//   const { data } = await supabase.from("prompts").select("*");
+
+//   return {
+//     props: {
+//       prompts: data?.reverse() as { prompt: string; avatar: number }[],
+//       revalidate: 5,
+//     },
+//   };
+// };

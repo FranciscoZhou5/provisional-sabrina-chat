@@ -36,11 +36,6 @@ export function ChatProvider({ children }: { children: React.ReactNode }) {
 
       setMessages((prev) => [...prev, { role: "user", content: message }]);
 
-      const { error } = await supabase.from("prompts").insert({
-        prompt: message,
-        avatar: Math.floor(Math.random() * (8 - 1 + 1)) + 1,
-      });
-
       const response = await fetch("/api/response", {
         method: "POST",
         headers: {

@@ -61,7 +61,7 @@ export const getStaticProps = async () => {
   return {
     props: {
       prompts: data?.reverse() as { prompt: string; avatar: number }[],
-      revalidate: 10,
+      revalidate: 5,
     },
   };
 };

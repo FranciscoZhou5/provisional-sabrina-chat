@@ -39,14 +39,19 @@ const handler = async (req: Request): Promise<Response> => {
     return new Response("No prompt in the request", { status: 400 });
   }
 
-  if (messages.length === 1) {
-    const { data, error } = await supabase.from("prompts").insert({
-      prompt: messages[0].content,
-      avatar: Math.floor(Math.random() * (8 - 1 + 1)) + 1,
-    });
+  // if (messages.length === 1) {
+  //   const { data, error } = await supabase.from("prompts").insert({
+  //     prompt: messages[0].content,
+  //     avatar: Math.floor(Math.random() * (8 - 1 + 1)) + 1,
+  //   });
 
-    console.log(data, error);
-  }
+  //   console.log(data, error);
+  // }
+
+  const { error } = await supabase.from("prompts").insert({
+    prompt: messages[messages.length - 1].content,
+    avatar: Math.floor(Math.random() * (8 - 1 + 1)) + 1,
+  });
 
   const payload: OpenAIStreamPayload = {
     model: "gpt-3.5-turbo",

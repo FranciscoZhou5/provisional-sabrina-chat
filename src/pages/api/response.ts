@@ -1,5 +1,6 @@
 import { ChatMessage } from "@/context/ChatContext";
 import { OpenAIStream, OpenAIStreamPayload } from "../../utils/OpenAIStream";
+import { supabase } from "@/lib/supabase";
 
 if (!process.env.OPENAI_API_KEY) {
   throw new Error("Missing env var from OpenAI");
@@ -36,6 +37,15 @@ const handler = async (req: Request): Promise<Response> => {
 
   if (!messages) {
     return new Response("No prompt in the request", { status: 400 });
+  }
+
+  if (messages.length === 1) {
+    const { data, error } = await supabase.from("prompts").insert({
+      prompt: messages[0].content,
+      avatar: Math.floor(Math.random() * (8 - 1 + 1)) + 1,
+    });
+
+    console.log(data, error);
   }
 
   const payload: OpenAIStreamPayload = {

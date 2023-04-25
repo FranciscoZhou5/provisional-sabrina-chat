@@ -7,7 +7,7 @@ import { useChatContext } from "@/context/ChatContext";
 function PromptInput() {
   const [prompt, setPrompt] = useState("");
 
-  const { handleSendMessage } = useChatContext();
+  const { handleSendMessage, showHeroSection } = useChatContext();
 
   return (
     <form className="max-w-[650px] z-20 px-4 fixed bottom-6 left-1/2 -translate-x-1/2 w-full">

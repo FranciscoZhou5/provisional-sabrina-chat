@@ -1,15 +1,16 @@
 import Image from "next/image";
 import { ChatAgent } from "@/context/ChatContext";
 import classNames from "classnames";
-import { memo } from "react";
+import { memo, useMemo } from "react";
 import MarkdownRenderer from "../MarkdownRenderer";
 
 interface IMessageProps {
   content: string;
   role: ChatAgent;
+  userAvatar: number;
 }
 
-function Message({ content, role }: IMessageProps) {
+function Message({ content, role, userAvatar }: IMessageProps) {
   if (role === "system") return <></>;
 
   return (
@@ -18,7 +19,7 @@ function Message({ content, role }: IMessageProps) {
         <div className="h-full flex items-start">
           <div className="w-10 h-10 relative">
             <Image
-              src={role === "user" ? "/user.png" : "/chisato.jpg"}
+              src={role === "user" ? `/users/user-avatar-${userAvatar}.jpg` : "/chisato.jpg"}
               sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
               alt="User avatar"
               fill
@@ -29,6 +30,7 @@ function Message({ content, role }: IMessageProps) {
 
         <div className="flex justify-center flex-col w-[84%] text-sm md:text-base">
           <strong> {role === "user" ? "Usuário" : "Sabrina"} </strong>
+
           <MarkdownRenderer content={content} />
         </div>
 

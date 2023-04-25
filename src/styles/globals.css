@@ -7,6 +7,10 @@ body {
   @apply scrollbar scrollbar-thumb-gray-300 scrollbar-track-slate-200 dark:scrollbar-thumb-[#1c1c1f] dark:scrollbar-track-[#09090b];
 }
 
+:is(svg) {
+  @apply dark:text-gray-400 text-gray-600 text-sm;
+}
+
 code,
 pre {
   @apply font-monospace;

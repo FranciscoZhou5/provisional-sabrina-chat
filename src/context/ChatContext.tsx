@@ -1,3 +1,4 @@
+import { supabase } from "@/lib/supabase";
 import { Dispatch, SetStateAction, createContext, useCallback, useContext, useEffect, useMemo, useState } from "react";
 
 export type ChatAgent = "user" | "system" | "assistant";
@@ -35,6 +36,11 @@ export function ChatProvider({ children }: { children: React.ReactNode }) {
 
       setMessages((prev) => [...prev, { role: "user", content: message }]);
 
+      const { error } = await supabase.from("prompts").insert({
+        prompt: message,
+        avatar: Math.floor(Math.random() * (8 - 1 + 1)) + 1,
+      });
+
       const response = await fetch("/api/response", {
         method: "POST",
         headers: {
@@ -44,8 +50,6 @@ export function ChatProvider({ children }: { children: React.ReactNode }) {
           messages: [...messages, { role: "user", content: message }],
         }),
       });
-      
-      console.log(response)
 
       if (!response.ok) {
         const { status } = response;

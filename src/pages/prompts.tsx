@@ -2,7 +2,7 @@ import Header from "@/components/Header";
 import MarkdownRenderer from "@/components/MarkdownRenderer";
 import { supabase } from "@/lib/supabase";
 import { ArrowLeft } from "@phosphor-icons/react";
-import { InferGetStaticPropsType } from "next";
+import { GetServerSideProps } from "next";
 import Head from "next/head";
 import Image from "next/image";
 import Link from "next/link";
@@ -20,7 +20,7 @@ function PromptsList({ prompts }: IProps) {
 
       <Header />
 
-      <main>
+      {/* <main>
         <div className="max-w-[1000px] mx-auto pt-4 px-4 flex">
           <Link href="/" className="group">
             <ArrowLeft size={24} className="group-hover:dark:hover:text-white group-hover:text-black duration-200" />
@@ -54,18 +54,27 @@ function PromptsList({ prompts }: IProps) {
             </div>
           ))}
         </div>
-      </main>
+      </main> */}
     </>
   );
 }
 
-PromptsList.getInitialProps = async () => {
-  const { data } = await supabase.from("prompts").select("*");
-
+export const getServerSideProps: GetServerSideProps = async () => {
   return {
-    prompts: data?.reverse() as { prompt: string; avatar: number }[],
+    redirect: {
+      destination: "/",
+      permanent: true,
+    },
   };
 };
+
+// PromptsList.getInitialProps = async () => {
+//   const { data } = await supabase.from("prompts").select("*");
+
+//   return {
+//     prompts: data?.reverse() as { prompt: string; avatar: number }[],
+//   };
+// };
 
 export default PromptsList;
 

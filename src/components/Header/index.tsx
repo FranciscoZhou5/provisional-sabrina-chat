@@ -14,9 +14,13 @@ export default function Header() {
       </Link>
 
       <div className="flex items-center space-x-4">
-        <Link href="/prompts">
-          <ChatCircle size={24} className="hover:text-black dark:hover:text-white duration-200" />
-        </Link>
+        <div className="cursor-not-allowed">
+          <ChatCircle size={24} />
+        </div>
+
+        {/* <Link href="/prompts">
+          <ChatCircle size={24} className="hover:text-black dark:hover:text-white duration-200 " />
+        </Link> */}
 
         <ToggleThemeIcon className="w-6 h-6 cursor-pointer hover:text-black dark:hover:text-white duration-200" onClick={toggleTheme} />
       </div>

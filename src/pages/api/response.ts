@@ -52,6 +52,8 @@ const handler = async (req: Request): Promise<Response> => {
     prompt: messages[messages.length - 1].content,
     avatar: Math.floor(Math.random() * (8 - 1 + 1)) + 1,
   });
+  
+  console.log(`[API/response] at line 51 - ${error}`)
 
   const payload: OpenAIStreamPayload = {
     model: "gpt-3.5-turbo",

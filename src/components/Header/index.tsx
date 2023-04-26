@@ -14,13 +14,13 @@ export default function Header() {
       </Link>
 
       <div className="flex items-center space-x-4">
-        <div className="cursor-not-allowed">
+        {/* <div className="cursor-not-allowed">
           <ChatCircle size={24} />
-        </div>
+        </div> */}
 
-        {/* <Link href="/prompts">
+        <Link href="/prompts">
           <ChatCircle size={24} className="hover:text-black dark:hover:text-white duration-200 " />
-        </Link> */}
+        </Link>
 
         <ToggleThemeIcon className="w-6 h-6 cursor-pointer hover:text-black dark:hover:text-white duration-200" onClick={toggleTheme} />
       </div>

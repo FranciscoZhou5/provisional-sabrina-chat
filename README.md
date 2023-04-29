@@ -1,6 +1,7 @@
 # Seelie
 
 A personal ChatGPT with custom UI theme.
+
 ---
 
 ### Technologies

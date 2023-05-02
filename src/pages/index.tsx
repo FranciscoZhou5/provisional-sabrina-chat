@@ -4,8 +4,21 @@ import Header from "@/components/Header";
 import ChatMessages from "@/components/ChatMessages";
 import PromptInput from "@/components/PromptInput";
 import Hero from "@/components/Hero";
+import { useEffect } from "react";
+import { parseCookies } from "nookies";
+import { useRouter } from "next/router";
 
 export default function Home() {
+  const router = useRouter();
+
+  useEffect(() => {
+    const { username } = parseCookies();
+
+    if (!username) {
+      router.push("/login");
+    }
+  }, [router]);
+
   return (
     <>
       <Head>

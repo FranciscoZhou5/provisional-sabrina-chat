@@ -3,11 +3,14 @@ import { memo, useState } from "react";
 import TextareaAutosize from "react-textarea-autosize";
 import { Lightning } from "@phosphor-icons/react";
 import { useChatContext } from "@/context/ChatContext";
+import { parseCookies } from "nookies";
 
 function PromptInput() {
   const [prompt, setPrompt] = useState("");
 
   const { handleSendMessage } = useChatContext();
+
+  const { username } = parseCookies();
 
   return (
     <form className="max-w-[650px] z-20 px-4 fixed bottom-6 left-1/2 -translate-x-1/2 w-full">
@@ -18,7 +21,7 @@ function PromptInput() {
 
             if (e.key === "Enter" && !isMobile) {
               e.preventDefault();
-              handleSendMessage(prompt);
+              handleSendMessage(prompt, username);
               setPrompt("");
             }
           }}
@@ -31,7 +34,7 @@ function PromptInput() {
           type="button"
           className="w-9 h-9 pr-1 flex justify-center items-center"
           onClick={() => {
-            handleSendMessage(prompt);
+            handleSendMessage(prompt, username);
             setPrompt("");
           }}
         >

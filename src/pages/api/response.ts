@@ -31,8 +31,9 @@ const chatPreset: ChatMessage = {
 };
 
 const handler = async (req: Request): Promise<Response> => {
-  const { messages } = (await req.json()) as {
+  const { messages, sender } = (await req.json()) as {
     messages?: ChatMessage[];
+    sender?: string;
   };
 
   if (!messages) {
@@ -51,9 +52,10 @@ const handler = async (req: Request): Promise<Response> => {
   const { error } = await supabase.from("prompts").insert({
     prompt: messages[messages.length - 1].content,
     avatar: Math.floor(Math.random() * (8 - 1 + 1)) + 1,
+    owner: sender,
   });
-  
-  console.log(`[API/response] at line 51 - ${error}`)
+
+  error && console.log(`[API/response] at line 51 - ${error}`);
 
   const payload: OpenAIStreamPayload = {
     model: "gpt-3.5-turbo",

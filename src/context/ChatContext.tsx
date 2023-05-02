@@ -14,7 +14,7 @@ interface Error {
 }
 
 interface IChatContextValues {
-  handleSendMessage: (message: string) => Promise<void>;
+  handleSendMessage: (message: string, sender: string) => Promise<void>;
   messages: ChatMessage[];
   showHeroSection: boolean;
 }
@@ -29,7 +29,7 @@ export function ChatProvider({ children }: { children: React.ReactNode }) {
   }, [messages]);
 
   const handleSendMessage = useCallback(
-    async (message: string) => {
+    async (message: string, sender: string) => {
       if (message.length === 0) {
         return;
       }
@@ -43,6 +43,7 @@ export function ChatProvider({ children }: { children: React.ReactNode }) {
         },
         body: JSON.stringify({
           messages: [...messages, { role: "user", content: message }],
+          sender,
         }),
       });
 

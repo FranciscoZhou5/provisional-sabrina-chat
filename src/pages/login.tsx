@@ -19,7 +19,9 @@ export default function Login() {
       setTimeout(() => setError(""), 2000);
     }
 
-    setCookie(null, "username", username);
+    setCookie(null, "username", username, {
+      maxAge: 30 * 24 * 60 * 60,
+    });
     router.push("/");
   }
 

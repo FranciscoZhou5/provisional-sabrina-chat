@@ -1,13 +1,23 @@
 import Head from "next/head";
+import { useRouter } from "next/router";
+import { useEffect } from "react";
 
 import Header from "@/components/Header";
 import ChatMessages from "@/components/ChatMessages";
 import PromptInput from "@/components/PromptInput";
 import Hero from "@/components/Hero";
-import { parseCookies } from "nookies";
-import { GetServerSideProps } from "next";
 
 export default function Home() {
+  const router = useRouter();
+
+  useEffect(() => {
+    const username = localStorage.getItem("auth@username");
+
+    if (!username) {
+      router.push("/login");
+    }
+  }, [router]);
+
   return (
     <>
       <Head>
@@ -29,20 +39,3 @@ export default function Home() {
     </>
   );
 }
-
-export const getServerSideProps: GetServerSideProps = async (ctx) => {
-  const { username } = parseCookies(ctx);
-
-  if (!username) {
-    return {
-      redirect: {
-        destination: "/login",
-        permanent: false,
-      },
-    };
-  }
-
-  return {
-    props: {},
-  };
-};

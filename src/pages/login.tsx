@@ -17,11 +17,16 @@ export default function Login() {
     if (username.length === 0) {
       setError("Preencha o campo de nome");
       setTimeout(() => setError(""), 2000);
+
+      return;
     }
 
     setCookie(null, "username", username, {
       maxAge: 30 * 24 * 60 * 60,
     });
+
+    localStorage.setItem("auth@username", username);
+
     router.push("/");
   }
 
@@ -48,7 +53,7 @@ export default function Login() {
 
       <div className="w-full h-screen flex justify-center items-center">
         <form onSubmit={handleSubmit}>
-          <div className="relative flex flex-col dark:bg-zinc-800 rounded-md p-3">
+          <div className="relative flex flex-col bg-gray-200 dark:bg-zinc-800 rounded-md p-3">
             <div className="flex flex-col">
               <label htmlFor="username" className="pb-1">
                 Seu nome
@@ -58,8 +63,8 @@ export default function Login() {
                 type="text"
                 name="username"
                 className={classNames(
-                  "bg-transparent rounded-md p-2 text-sm outline-none duration-200  dark:border dark:border-zinc-700 focus:ring-2 dark:focus:ring-purple-600",
-                  error ? "ring dark:focus:ring-red-600 ring-red-500" : "ring-0 dark:ring-zinc-700"
+                  "bg-transparent rounded-md p-2 text-sm outline-none duration-200 border border-zinc-400 dark:border-zinc-700 focus:ring-2 focus:ring-purple-600",
+                  error ? "ring dark:focus:ring-red-600 ring-red-500" : ""
                 )}
                 placeholder={generateUsernamePlaceholder()}
                 value={username}
@@ -67,7 +72,7 @@ export default function Login() {
               />
               <span className="text-xs text-red-500 h-6 py-1">{error}</span>
             </div>
-            <button className="rounded-md bg-purple-700  p-2 text-sm hover:bg-purple-800 duration-200"> Entrar </button>
+            <button className="rounded-md bg-purple-700  p-2 text-sm hover:bg-purple-800 duration-200 text-white"> Entrar </button>
           </div>
         </form>
       </div>

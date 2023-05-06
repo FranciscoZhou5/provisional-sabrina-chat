@@ -10,13 +10,13 @@ export default function Header() {
   return (
     <header className="h-12 flex justify-between items-center px-4 md:px-6 lg:px-8 border-b border-zinc-200 dark:border-zinc-800">
       <Link href="/">
-        <strong> Chat Sabrina </strong>
+        <strong> Sabrina </strong>
       </Link>
 
       <div className="flex items-center space-x-4">
-        <div className="cursor-not-allowed">
+        {/* <div className="cursor-not-allowed">
           <ChatCircle size={24} />
-        </div>
+        </div> */}
 
         {/* <Link href="/prompts">
           <ChatCircle size={24} className="hover:text-black dark:hover:text-white duration-200 " />

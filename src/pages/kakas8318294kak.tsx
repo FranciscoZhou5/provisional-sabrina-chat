@@ -18,6 +18,8 @@ interface IProps {
 function PromptsList({ prompts, totalPages, currentPage }: IProps) {
   const router = useRouter();
 
+  console.log(prompts)
+
   // if (true) {
   //   return <></>;
   // }

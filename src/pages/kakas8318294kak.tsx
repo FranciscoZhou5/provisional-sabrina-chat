@@ -64,6 +64,7 @@ function PromptsList({ prompts, totalPages, currentPage }: IProps) {
                 </div>
 
                 <div className="flex justify-center flex-col w-[84%] text-sm md:text-base">
+                  {/* @ts-ignore */}
                   <strong> {prompts?.owner || "Usuário anônimo"} </strong>
 
                   <MarkdownRenderer content={prompt} />

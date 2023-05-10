@@ -65,7 +65,7 @@ function PromptsList({ prompts, totalPages, currentPage }: IProps) {
           ))}
 
           <div className="px-3 md:px-8 mb-4 w-full flex justify-between items-center">
-            <button disabled={currentPage - 1 === 0} onClick={() => router.push(`/prompts?page=${currentPage - 1}`)}>
+            <button disabled={currentPage - 1 === 0} onClick={() => router.push(`/kakas8318294kak?page=${currentPage - 1}`)}>
               <CaretLeft size={24} className={classNames(currentPage - 1 === 0 ? "cursor-not-allowed" : "hover:text-white duration-200")} />
             </button>
 
@@ -73,7 +73,7 @@ function PromptsList({ prompts, totalPages, currentPage }: IProps) {
               <span className="dark:text-white text-gray-900">{currentPage}</span>
             </div>
 
-            <button disabled={currentPage + 1 > totalPages} onClick={() => router.push(`/prompts?page=${currentPage + 1}`)}>
+            <button disabled={currentPage + 1 > totalPages} onClick={() => router.push(`/kakas8318294kak?page=${currentPage + 1}`)}>
               <CaretRight
                 size={24}
                 className={classNames(currentPage + 1 > totalPages ? "cursor-not-allowed" : "hover:text-white duration-200")}

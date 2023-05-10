@@ -9,8 +9,14 @@ import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/router";
 
+interface Prompt {
+  prompt: string; 
+  avatar: number;
+  owner: string;
+}
+
 interface IProps {
-  prompts: { prompt: string; avatar: number }[];
+  prompts: Prompt[];
   totalPages: number;
   currentPage: number;
 }
@@ -58,7 +64,7 @@ function PromptsList({ prompts, totalPages, currentPage }: IProps) {
                 </div>
 
                 <div className="flex justify-center flex-col w-[84%] text-sm md:text-base">
-                  <strong> Usuário anônimo </strong>
+                  <strong> {prompts?.owner || "Usuário anônimo"} </strong>
 
                   <MarkdownRenderer content={prompt} />
                 </div>
@@ -119,7 +125,7 @@ PromptsList.getInitialProps = async (ctx: Context) => {
   const result = await paginateAndReverseData(data as any[], ITEMS_PER_PAGE, page);
 
   return {
-    prompts: result.paginatedArray as { prompt: string; avatar: number }[],
+    prompts: result.paginatedArray as Prompt[],
     totalPages: result.totalPages,
     currentPage: page,
   };

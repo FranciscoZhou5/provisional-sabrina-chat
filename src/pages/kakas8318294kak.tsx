@@ -22,8 +22,6 @@ interface IProps {
 function PromptsList({ prompts, totalPages, currentPage }: IProps) {
   const router = useRouter();
 
-  console.log(prompts?.owner)
-
   // if (true) {
   //   return <></>;
   // }
@@ -63,7 +61,7 @@ function PromptsList({ prompts, totalPages, currentPage }: IProps) {
 
                 <div className="flex justify-center flex-col w-[84%] text-sm md:text-base">
                   {/* @ts-ignore */}
-                  <strong> {prompts?.owner} </strong>
+                  <strong> {prompts?.owner || "Usuário anônimo"} </strong>
 
                   <MarkdownRenderer content={prompt} />
                 </div>

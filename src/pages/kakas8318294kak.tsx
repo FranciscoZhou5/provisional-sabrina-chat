@@ -9,14 +9,12 @@ import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/router";
 
-interface Prompt {
-  prompt: string; 
-  avatar: number;
-  owner: string;
-}
-
 interface IProps {
-  prompts: Prompt[];
+  prompts: {
+    prompt: string; 
+    avatar: number;
+    owner: string;
+  }[];
   totalPages: number;
   currentPage: number;
 }
@@ -126,7 +124,7 @@ PromptsList.getInitialProps = async (ctx: Context) => {
   const result = await paginateAndReverseData(data as any[], ITEMS_PER_PAGE, page);
 
   return {
-    prompts: result.paginatedArray as Prompt[],
+    prompts: result.paginatedArray as { prompt: string; avatar: number; owner: string; }[],
     totalPages: result.totalPages,
     currentPage: page,
   };

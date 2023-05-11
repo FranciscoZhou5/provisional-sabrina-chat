@@ -11,7 +11,7 @@ import { useRouter } from "next/router";
 
 interface IProps {
   prompts: {
-    prompt: string; 
+    prompt: string;
     avatar: number;
     owner: string;
   }[];
@@ -44,7 +44,7 @@ function PromptsList({ prompts, totalPages, currentPage }: IProps) {
         <div className="max-w-[800px] mx-auto py-4">
           <h2 className="text-center px-4 text-lg"> Aqui você pode ver o que a galera anda perguntando... </h2>
 
-          {prompts?.map(({ prompt, avatar }) => (
+          {prompts?.map(({ prompt, avatar, owner }) => (
             <div key={Math.random()} className="my-6 md:my-8 px-3 md:px-8">
               <div className=" py-4 px-4 md:px-6 lg:px-8 flex items-center rounded-md gap-4 md:gap-6 lg:gap-8 relative bg-gray-200 dark:bg-zinc-950">
                 <div className="h-full flex items-start">
@@ -60,8 +60,7 @@ function PromptsList({ prompts, totalPages, currentPage }: IProps) {
                 </div>
 
                 <div className="flex justify-center flex-col w-[84%] text-sm md:text-base">
-                  {/* @ts-ignore */}
-                  <strong> {prompts?.owner || "Usuário anônimo"} </strong>
+                  <strong> {owner} </strong>
 
                   <MarkdownRenderer content={prompt} />
                 </div>
@@ -122,7 +121,7 @@ PromptsList.getInitialProps = async (ctx: Context) => {
   const result = await paginateAndReverseData(data as any[], ITEMS_PER_PAGE, page);
 
   return {
-    prompts: result.paginatedArray as { prompt: string; avatar: number; owner: string; }[],
+    prompts: result.paginatedArray as { prompt: string; avatar: number; owner: string }[],
     totalPages: result.totalPages,
     currentPage: page,
   };

@@ -21,10 +21,6 @@ export default function Login() {
       return;
     }
 
-    setCookie(null, "username", username, {
-      maxAge: 30 * 24 * 60 * 60,
-    });
-
     localStorage.setItem("auth@username", username);
 
     router.push("/");

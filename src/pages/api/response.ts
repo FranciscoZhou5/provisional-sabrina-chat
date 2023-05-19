@@ -55,7 +55,7 @@ const handler = async (req: Request): Promise<Response> => {
     owner: sender,
   });
 
-  error && console.log(`[API/response] at line 51 - ${error}`);
+  console.log(`[API/response] at line 51 - ${error}`);
 
   const payload: OpenAIStreamPayload = {
     model: "gpt-3.5-turbo",

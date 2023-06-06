@@ -12,11 +12,10 @@ export default function Home() {
   const router = useRouter();
 
   useEffect(() => {
-    // const username = localStorage.getItem("auth@username");
-    // if (!username) {
-    //   router.push("/login");
-    // }
-    // router.push("https://alycia.vercel.app/");
+    const username = localStorage.getItem("auth@username");
+    if (!username) {
+      router.push("/login");
+    }
   }, [router]);
 
   return (
@@ -40,12 +39,3 @@ export default function Home() {
     </>
   );
 }
-
-export const getServerSideProps: GetServerSideProps = async () => {
-  return {
-    redirect: {
-      destination: "https://alycia.vercel.app",
-      permanent: false,
-    },
-  };
-};

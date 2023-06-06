@@ -1,5 +1,5 @@
 import Header from "@/components/Header";
-import MarkdownRenderer from "@/components/MarkdownRenderer";
+import MarkdownRenderer from "@/components/ChatMessages/MarkdownRenderer";
 import { supabase } from "@/lib/supabase";
 import { ArrowLeft, CaretLeft, CaretRight } from "@phosphor-icons/react";
 import classNames from "classnames";

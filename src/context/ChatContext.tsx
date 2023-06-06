@@ -23,6 +23,7 @@ const ChatContext = createContext({} as IChatContextValues);
 
 export function ChatProvider({ children }: { children: React.ReactNode }) {
   const [messages, setMessages] = useState<ChatMessage[]>([]);
+  const [chatResponse, setChatResponse] = useState("");
 
   const showHeroSection = useMemo(() => {
     return messages.length === 0;

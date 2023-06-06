@@ -30,43 +30,49 @@ const chatPreset: ChatMessage = {
   role: "system",
 };
 
-const handler = async (req: Request): Promise<Response> => {
-  const { messages, sender } = (await req.json()) as {
-    messages?: ChatMessage[];
-    sender?: string;
-  };
+const handler = async (req: Request) => {
+  try {
+    const { messages, sender } = (await req.json()) as {
+      messages?: ChatMessage[];
+      sender?: string;
+    };
 
-  if (!messages) {
-    return new Response("No prompt in the request", { status: 400 });
+    if (!messages) {
+      return new Response("No prompt in the request", { status: 400 });
+    }
+
+    // if (messages.length === 1) {
+    //   const { data, error } = await supabase.from("prompts").insert({
+    //     prompt: messages[0].content,
+    //     avatar: Math.floor(Math.random() * (8 - 1 + 1)) + 1,
+    //   });
+
+    //   console.log(data, error);
+    // }
+
+    // const { error } = await supabase.from("prompts").insert({
+    //   prompt: messages[messages.length - 1].content,
+    //   avatar: Math.floor(Math.random() * (8 - 1 + 1)) + 1,
+    //   owner: sender,
+    // });
+
+    // error && console.log(`[API/response] at line 51 - ${error}`);
+
+    const payload: OpenAIStreamPayload = {
+      model: "gpt-3.5-turbo",
+      messages: [chatPreset, ...messages],
+      temperature: 0.7,
+      stream: true,
+    };
+
+    const stream = await OpenAIStream(payload);
+
+    return new Response(stream);
+  } catch (err) {
+    console.log(err);
+
+    return new Response("Server error", { status: 500 });
   }
-
-  // if (messages.length === 1) {
-  //   const { data, error } = await supabase.from("prompts").insert({
-  //     prompt: messages[0].content,
-  //     avatar: Math.floor(Math.random() * (8 - 1 + 1)) + 1,
-  //   });
-
-  //   console.log(data, error);
-  // }
-
-  const { error } = await supabase.from("prompts").insert({
-    prompt: messages[messages.length - 1].content,
-    avatar: Math.floor(Math.random() * (8 - 1 + 1)) + 1,
-    owner: sender,
-  });
-
-  error && console.log(`[API/response] at line 51 - ${error}`);
-
-  const payload: OpenAIStreamPayload = {
-    model: "gpt-3.5-turbo",
-    messages: [chatPreset, ...messages],
-    temperature: 0.7,
-    stream: true,
-  };
-
-  const stream = await OpenAIStream(payload);
-
-  return new Response(stream);
 };
 
 export default handler;

@@ -2,7 +2,6 @@ import Header from "@/components/Header";
 import classNames from "classnames";
 import Head from "next/head";
 import { useRouter } from "next/router";
-import { setCookie } from "nookies";
 import { FormEvent, useState } from "react";
 
 export default function Login() {
